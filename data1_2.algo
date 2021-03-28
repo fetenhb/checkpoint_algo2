@@ -1,0 +1,36 @@
+ALGORITHM data1_2
+VAR
+    tab1,tab2 : ARRAY_OF INTEGER[30];
+    keys : ARRAY_OF INTEGER[60];
+    hashT := HASH_TABLE<INTEGER,INTEGER>;
+    i: INTEGER;
+    sum : INTEGER := 0;
+BEGIN
+    
+    //parcourir le premier tableau et incrémenter le clé si l'élément existe
+    FOR i FROM 0 TO tab1.length -1 DO
+        IF (hashT.lookup(tab1[i]) = TRUE) THEN
+            hashT.insert(tab1[i],hashT.get(tab1[i])+1);
+        ELSE
+            hashT.insert(tab1[i],1);
+        END_IF
+    END_FOR
+    //parcourir le deuxième tableau et et incrémenter le clé si l'élément existe
+
+    FOR i FROM 0 TO tab2.length -1 STEP 1  DO
+        IF (hashT.lookup(tab2[i]) = TRUE) THEN
+            hashT.insert(tab1[i],hashT.get(tab2[i])+1);
+        ELSE
+            hashT.insert(tab2[i],1);
+        END_IF
+    END_FOR
+
+    // calcule de la somme
+    keys := hashT.getKeys();
+    FOR i FROM 0 TO keys.length -1 STEP 1  DO
+        IF (hashT.get(keys[i]) = 1) THEN
+            sum := sum +keys[i];
+        END_IF
+    END_FOR
+
+END

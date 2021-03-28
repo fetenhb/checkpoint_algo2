@@ -1,0 +1,40 @@
+ALGORITHM data2_1
+VAR
+    tab1 : ARRAY_OF INTEGER;
+    tab2 : ARRAY_OF INTEGER;
+    tab3 : ARRAY_OF INTEGER;
+    i : INTEGER;
+    j : INTEGER;
+    k : INTEGER := 0;
+    trouve : BOOLEAN;
+    sum : INTEGER :=  0;
+    
+BEGIN
+    
+    // chercher les élémenets du tab1 dans tab2
+    FOR i FROM 0 TO tab1.length-1 DO
+        trouve := FALSE;
+        FOR j FROM 0 TO tab2.length-1 DO
+            IF(tab1[i] = tab2[j]) THEN
+                trouve := TRUE;
+                BREAK;
+            END
+        END_FOR
+        // si l'élément existe dans tab2 on calcule la somme
+        IF ( trouve = TRUE) THEN
+            sum := sum + tab1[i]*2;
+            //remplir le troisième tableau par l'éléments trouvé
+            tab3[k] := tab1[i];
+            k:=k+1;
+        END_IF
+    END_FOR
+
+
+    // affichage des éléments communs
+    write ("les éléments communs sont  :");
+    FOR i FROM 0 TO tab3.length-1 DO
+    write (tab3[i]);
+    END_FOR
+    // affichage de la somme
+    Write("La somme des éléments ",sum);
+END
